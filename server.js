@@ -15,7 +15,7 @@ app.use('/', (req, res, next) =>{
     return res.json({test:'test'})
 })
 
-mongose.connect(process.env.mongoPath).then(()=>{
+mongose.connect(process.env.mongoPath, { useNewUrlParser: true, useUnifiedTopology: true }).then(()=>{
     console.log('connect to database')
     app.listen(5000)
     console.log('list in port 5000')

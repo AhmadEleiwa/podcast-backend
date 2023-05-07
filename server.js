@@ -1,7 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const castRoutes = require('./routes/castRoutes')
-
+const mongose = require('mongoose')
+const dotenv = require('dotenv').config()
 const app = express()
 
 
@@ -14,5 +15,11 @@ app.use('/', (req, res, next) =>{
     return res.json({test:'test'})
 })
 
+mongose.connect(process.env.mongoPath).then(()=>{
+    console.log('connect to database')
+    app.listen(5000)
+    console.log('list in port 5000')
 
-app.listen(5000)
+}).catch((err)=>{
+    console.log(err)
+})
